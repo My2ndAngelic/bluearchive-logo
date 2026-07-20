@@ -4,8 +4,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" type="text/css" href="fonts/RoGSans/font.css" />
-  <link rel="stylesheet" type="text/css" href="fonts/GlowSans/font.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,600;1,700&display=swap" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,700;0,800;1,700;1,800&display=swap" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,700;0,800;1,700;1,800&display=swap" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,700;0,800;1,700;1,800&display=swap" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/CeriseBouquet/static@master/fonts/RoGSans_sliced/font.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Nyannnnnng/GyeonggiTitleWoff/stylesheet.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/CeriseBouquet/static@master/fonts/GlowSans/font.css" />
   <title class="i18n" data-i18n="title">Blue Archive Logo Generator</title>
 </head>
 
@@ -24,11 +31,92 @@
     </div>
   </section>
   <section class="w-full mx-auto my-6 flex flex-col sm:w-[32rem]">
-    <div class="flex justify-center my-4 px-2">
+    <div class="flex justify-center my-4 px-2 flex-wrap">
       <input id="textL" type="text" placeholder="Type here" value="Blue"
-        class="input input-bordered input-md input-primary mr-1 w-40 max-w-[14rem] flex-1" />
+        class="input input-bordered input-md input-primary mr-1 my-2 w-40 max-w-[14rem] flex-1" />
       <input id="textR" type="text" placeholder="Type here" value="Archive"
-        class="input input-bordered input-md input-secondary ml-1 w-40 max-w-[14rem] flex-1" />
+        class="input input-bordered input-md input-secondary ml-1 my-2 w-40 max-w-[14rem] flex-1" />
+      <input id="textSub" type="text" placeholder="Type here" value=""
+        class="input input-bordered input-md input-accent ml-1 my-2 w-40 max-w-[14rem] flex-1" />
+    </div>
+    <div class="flex flex-wrap justify-center gap-3 my-1 px-2">
+      <label class="flex items-center gap-3 border border-base-300 rounded-lg px-3 py-2">
+        <input id="pointColor" type="color" value="#128afa"
+          class="p-1 h-10 w-14 block bg-white cursor-pointer rounded-lg" />
+        <span class="i18n text-sm" data-i18n="change-point-color">Change Point Color</span>
+      </label>
+      <label class="flex items-center gap-3 border border-base-300 rounded-lg px-3 py-2">
+        <input id="textColor" type="color" value="#2b2b2b"
+          class="p-1 h-10 w-14 block bg-white cursor-pointer rounded-lg" />
+        <span class="i18n text-sm" data-i18n="change-text-color">Change Text Color</span>
+      </label>
+      <button class="i18n btn btn-outline btn-sm" id="reset" data-i18n="reset-color">Reset Color</button>
+    </div>
+    <div class="flex justify-center my-2 px-2">
+      <label class="flex items-center gap-2 border border-base-300 rounded-lg px-3 py-2">
+        <span class="i18n text-sm" data-i18n="font-profile">Font profile</span>
+        <select id="fontProfile" class="select select-bordered select-sm">
+          <option value="rog2" selected>RoG2</option>
+          <option value="custom" class="i18n" data-i18n="custom-font-option">Custom (Google Fonts)</option>
+        </select>
+      </label>
+    </div>
+    <div id="customSourceRow" class="flex justify-center my-2 px-2">
+      <label class="flex items-center gap-2 border border-base-300 rounded-lg px-3 py-2 w-full max-w-xl">
+        <span class="i18n text-sm whitespace-nowrap" data-i18n="custom-font-source">Source</span>
+        <select id="customFontSource" class="select select-bordered select-sm flex-1">
+          <option value="google" selected>Google</option>
+          <option value="adobe">Adobe</option>
+          <option value="local">Local</option>
+          <option value="other" class="i18n" data-i18n="custom-source-other">Other (CSS/Font URL)</option>
+        </select>
+      </label>
+    </div>
+    <div id="customGoogleRow" class="flex justify-center my-2 px-2">
+      <label class="flex items-center gap-2 border border-base-300 rounded-lg px-3 py-2 w-full max-w-xl">
+        <span class="i18n text-sm whitespace-nowrap" data-i18n="custom-font-label">Custom font</span>
+        <input id="customGoogleFontName" type="text" placeholder="Noto Sans" class="input input-bordered input-sm flex-1" />
+        <button class="i18n btn btn-primary btn-sm" id="applyGoogleFont" data-i18n="apply-custom-font">Apply</button>
+      </label>
+    </div>
+    <div id="customAdobeRow" class="flex justify-center my-2 px-2 hidden">
+      <label class="flex items-center gap-2 border border-base-300 rounded-lg px-3 py-2 w-full max-w-xl">
+        <span class="i18n text-sm whitespace-nowrap" data-i18n="adobe-kit-id">Adobe kit</span>
+        <input id="adobeKitId" type="text" placeholder="xxxxxxx" class="input input-bordered input-sm w-32" />
+        <span class="i18n text-sm whitespace-nowrap" data-i18n="adobe-font-family">Family</span>
+        <input id="adobeFontFamily" type="text" placeholder="your-family-name" class="input input-bordered input-sm flex-1" />
+        <button class="i18n btn btn-primary btn-sm" id="applyAdobeFont" data-i18n="apply-custom-font">Apply</button>
+      </label>
+    </div>
+    <div id="customLocalRow" class="flex justify-center my-2 px-2 hidden">
+      <label class="flex items-center gap-2 border border-base-300 rounded-lg px-3 py-2 w-full max-w-xl">
+        <span class="i18n text-sm whitespace-nowrap" data-i18n="local-font-file">Local file</span>
+        <input id="localFontFile" type="file" accept=".woff2,.woff,.ttf,.otf,font/woff2,font/woff,font/ttf,font/otf"
+          class="file-input file-input-bordered file-input-sm flex-1" />
+        <input id="localFontFamily" type="text" placeholder="Family name (optional)" class="input input-bordered input-sm flex-1" />
+        <button class="i18n btn btn-primary btn-sm" id="applyLocalFont" data-i18n="apply-custom-font">Apply</button>
+      </label>
+    </div>
+    <div id="customOtherRow" class="flex justify-center my-2 px-2 hidden">
+      <label class="flex items-center gap-2 border border-base-300 rounded-lg px-3 py-2 w-full max-w-xl">
+        <span class="i18n text-sm whitespace-nowrap" data-i18n="other-css-url">Font URL</span>
+        <input id="otherCssUrl" type="url" placeholder="https://example.com/font.css or https://example.com/font.woff2" class="input input-bordered input-sm flex-1" />
+        <input id="otherFontFamily" type="text" placeholder="Family name" class="input input-bordered input-sm flex-1" />
+        <button class="i18n btn btn-primary btn-sm" id="applyOtherFont" data-i18n="apply-custom-font">Apply</button>
+      </label>
+    </div>
+    <div id="customOtherHelpRow" class="flex justify-center px-2 pb-1 hidden">
+      <p class="i18n text-xs text-base-content/70 w-full max-w-xl" data-i18n="other-url-help">Other accepts a CSS file URL (font.css) or a direct font file URL (.woff2/.woff/.ttf/.otf).</p>
+    </div>
+    <div id="customTypographyRow" class="flex justify-center my-2 px-2">
+      <label class="flex items-center gap-2 border border-base-300 rounded-lg px-3 py-2 w-full max-w-xl">
+        <span class="i18n text-sm whitespace-nowrap" data-i18n="custom-font-size">Size</span>
+        <input id="customFontSize" type="number" min="24" max="120" step="1" value="64"
+          class="input input-bordered input-sm w-24" />
+        <span class="i18n text-sm whitespace-nowrap ml-2" data-i18n="custom-font-weight">Weight</span>
+        <input id="customFontWeight" type="number" min="100" max="900" step="100" value="800"
+          class="input input-bordered input-sm w-24" />
+      </label>
     </div>
     <div class="my-2">
       <label class="cursor-pointer label justify-start mx-10">
@@ -74,6 +162,10 @@
         <li>
           <span class="i18n" data-i18n="main-font">Main font: </span>
           <a href="https://www.morisawa.co.jp/fonts/specimen/1646" target="_blank">RoG2サンセリフStd B</a>
+        </li>
+        <li>
+          <span class="i18n" data-i18n="korean-font">Korean font: </span>
+          <a href="https://www.gg.go.kr/contents/contents.do?ciIdx=679&menuId=2457" target="_blank">Gyeonggi Cheonnyeon Title</a>
         </li>
         <li>
           <span class="i18n" data-i18n="fallback-font">Fallback font: </span>
